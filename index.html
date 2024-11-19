@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My App Redirect</title>
+    <script>
+        // Configuration URLs
+        const CONFIG = {
+            WEBSITE_URL: "https://darhayun1.github.io/Wallaballa-site",
+            IOS: {
+                APP_SCHEME: "wallaballa://open",
+                APP_STORE: "https://darhayun1.github.io/Wallaballa-site",
+                BUNDLE_ID: "com.dar.wallaballa.WallaBalla"
+            },
+            ANDROID: {
+                PACKAGE: "com.dar.wallaballa",
+                PLAY_STORE: "https://darhayun1.github.io/Wallaballa-site"
+            }
+        };
+
+        function redirectToApp() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            
+            const start = Date.now();
+            const timeout = 2500;
+
+            if (document.hidden) {
+                return;
+            }
+
+            if (/iPhone|iPad|iPod/i.test(userAgent)) {
+                // Universal Link for iOS
+                window.location.href = CONFIG.WEBSITE_URL;
+                
+                setTimeout(() => {
+                    window.location.href = CONFIG.IOS.APP_SCHEME;
+                    
+                    setTimeout(() => {
+                        if (!document.hidden && (Date.now() - start) < (timeout + 100)) {
+                            window.location.href = CONFIG.IOS.APP_STORE;
+                        }
+                    }, 1000);
+                }, 1000);
+            } else if (/android/i.test(userAgent)) {
+                // Universal Link for Android
+                window.location.href = CONFIG.WEBSITE_URL;
+                
+                setTimeout(() => {
+                    window.location.href = `intent://open#Intent;scheme=wallaballa;package=${CONFIG.ANDROID.PACKAGE};S.browser_fallback_url=${CONFIG.ANDROID.PLAY_STORE};end`;
+                }, 1000);
+            } else {
+                // Fallback for desktop or unsupported devices
+                window.location.href = CONFIG.WEBSITE_URL;
+            }
+        }
+
+        // Listen for visibility changes
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                // User returned from app store/play store without installing
+                // You could show a message or take other actions here
+            }
+        });
+
+        window.onload = redirectToApp;
+    </script>
+</head>
+<body>
+    <h1>Redirecting to My App...</h1>
+    <p>If you're not redirected automatically, <a href="#" onclick="redirectToApp(); return false;">click here</a>.</p>
+</body>
+</html>
