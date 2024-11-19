@@ -1,10 +1,11 @@
 [
     {
-        "relation": ["delegate_permission/common.handle_all_urls"],
-        "target": {
-            "namespace": "android_app",
-            "package_name": "com.yourapp",
-            "sha256_cert_fingerprints": ["fingerprint"]
-        }
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.dar.wallaballa",
+        "sha256_cert_fingerprints":
+          ["C5:04:13:96:D4:04:A4:4E:B0:2E:E8:46:F5:D3:FB:E1:DE:E0:C9:81:EC:6D:D5:78:13:0E:79:78:99:96:3F:25"]
+      }
     }
-]
+  ]
