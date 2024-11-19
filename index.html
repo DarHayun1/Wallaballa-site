@@ -50,8 +50,11 @@
                     window.location.href = `intent://open#Intent;scheme=wallaballa;package=${CONFIG.ANDROID.PACKAGE};S.browser_fallback_url=${CONFIG.ANDROID.PLAY_STORE};end`;
                 }, 1000);
             } else {
-                // Fallback for desktop or unsupported devices
-                window.location.href = CONFIG.WEBSITE_URL;
+                // Show desktop message instead of redirecting
+                document.getElementById('desktop-message').style.display = 'block';
+                // Hide the redirect message
+                document.querySelector('h1').style.display = 'none';
+                document.querySelector('p').style.display = 'none';
             }
         }
 
@@ -69,5 +72,14 @@
 <body>
     <h1>Redirecting to My App...</h1>
     <p>If you're not redirected automatically, <a href="#" onclick="redirectToApp(); return false;">click here</a>.</p>
+    <p id="desktop-message" style="display: none;">This app is only available on mobile devices. Please visit from your iOS or Android device.</p>
+
+    <script>
+        // Show desktop message if not on mobile
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        if (!(/iPhone|iPad|iPod|android/i.test(userAgent))) {
+            document.getElementById('desktop-message').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
