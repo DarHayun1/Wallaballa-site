@@ -44,11 +44,19 @@
                 }, 1000);
             } else if (/android/i.test(userAgent)) {
                 // Universal Link for Android
-                window.location.href = CONFIG.WEBSITE_URL;
+                const hasAttemptedRedirect = sessionStorage.getItem('attemptedRedirect');
                 
-                setTimeout(() => {
-                    window.location.href = `intent://open#Intent;scheme=wallaballa;package=${CONFIG.ANDROID.PACKAGE};S.browser_fallback_url=${CONFIG.ANDROID.PLAY_STORE};end`;
-                }, 1000);
+                if (!hasAttemptedRedirect) {
+                    sessionStorage.setItem('attemptedRedirect', 'true');
+                    window.location.href = CONFIG.WEBSITE_URL;
+                    
+                    setTimeout(() => {
+                        window.location.href = `intent://open#Intent;scheme=wallaballa;package=${CONFIG.ANDROID.PACKAGE};S.browser_fallback_url=${CONFIG.ANDROID.PLAY_STORE};end`;
+                    }, 1000);
+                } else {
+                    // If we've already tried redirecting, go straight to Play Store
+                    window.location.href = CONFIG.ANDROID.PLAY_STORE;
+                }
             } else {
                 // Show desktop message instead of redirecting
                 document.getElementById('desktop-message').style.display = 'block';
