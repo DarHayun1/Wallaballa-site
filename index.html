@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My App Redirect</title>
     <script>
-        // Configuration URLs
         const CONFIG = {
             WEBSITE_URL: "https://darhayun1.github.io/Wallaballa-site",
             IOS: {
@@ -21,73 +20,70 @@
 
         function redirectToApp() {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            
-            const start = Date.now();
-            const timeout = 2500;
 
-            if (document.hidden) {
-                return;
-            }
+            // Check if the app opened successfully by monitoring visibility
+            let appOpened = false;
+            const visibilityHandler = () => { if (document.hidden) appOpened = true; };
+            document.addEventListener("visibilitychange", visibilityHandler);
+
+            const timeout = 1500;
 
             if (/iPhone|iPad|iPod/i.test(userAgent)) {
-                // Universal Link for iOS
-                window.location.href = CONFIG.WEBSITE_URL;
-                
-                setTimeout(() => {
-                    window.location.href = CONFIG.IOS.APP_SCHEME;
-                    
+                if (!sessionStorage.getItem('attemptedRedirectIOS')) {
+                    sessionStorage.setItem('attemptedRedirectIOS', 'true');
+                    window.location.href = CONFIG.WEBSITE_URL;
+
                     setTimeout(() => {
-                        if (!document.hidden && (Date.now() - start) < (timeout + 100)) {
-                            window.location.href = CONFIG.IOS.APP_STORE;
-                        }
-                    }, 1000);
-                }, 1000);
+                        if (!appOpened) window.location.href = CONFIG.IOS.APP_SCHEME;
+                        setTimeout(() => {
+                            if (!appOpened) window.location.href = CONFIG.IOS.APP_STORE;
+                        }, timeout);
+                    }, timeout);
+                } else {
+                    window.location.href = CONFIG.IOS.APP_STORE;
+                }
             } else if (/android/i.test(userAgent)) {
-                // Universal Link for Android
-                const hasAttemptedRedirect = sessionStorage.getItem('attemptedRedirect');
-                
-                if (!hasAttemptedRedirect) {
+                if (!sessionStorage.getItem('attemptedRedirect')) {
                     sessionStorage.setItem('attemptedRedirect', 'true');
                     window.location.href = CONFIG.WEBSITE_URL;
-                    
+
                     setTimeout(() => {
-                        window.location.href = `intent://open#Intent;scheme=wallaballa;package=${CONFIG.ANDROID.PACKAGE};S.browser_fallback_url=${CONFIG.ANDROID.PLAY_STORE};end`;
-                    }, 1000);
+                        if (!appOpened) {
+                            window.location.href = `intent://open#Intent;scheme=wallaballa;package=${CONFIG.ANDROID.PACKAGE};S.browser_fallback_url=${CONFIG.ANDROID.PLAY_STORE};end`;
+                        }
+                    }, timeout);
                 } else {
-                    // If we've already tried redirecting, go straight to Play Store
                     window.location.href = CONFIG.ANDROID.PLAY_STORE;
                 }
             } else {
-                // Show desktop message instead of redirecting
-                document.getElementById('desktop-message').style.display = 'block';
-                // Hide the redirect message
-                document.querySelector('h1').style.display = 'none';
-                document.querySelector('p').style.display = 'none';
+                showDesktopMessage();
             }
+
+            // Cleanup visibility listener
+            setTimeout(() => {
+                document.removeEventListener("visibilitychange", visibilityHandler);
+            }, timeout * 2);
         }
 
-        // Listen for visibility changes
-        document.addEventListener('visibilitychange', function() {
-            if (!document.hidden) {
-                // User returned from app store/play store without installing
-                // You could show a message or take other actions here
-            }
-        });
+        function showDesktopMessage() {
+            document.getElementById('desktop-message').style.display = 'block';
+            document.querySelector('h1').style.display = 'none';
+            document.querySelector('p').style.display = 'none';
+        }
 
-        window.onload = redirectToApp;
+        window.onload = () => {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            if (!(/iPhone|iPad|iPod|android/i.test(userAgent))) {
+                showDesktopMessage();
+            } else {
+                redirectToApp();
+            }
+        };
     </script>
 </head>
 <body>
     <h1>Redirecting to My App...</h1>
     <p>If you're not redirected automatically, <a href="#" onclick="redirectToApp(); return false;">click here</a>.</p>
     <p id="desktop-message" style="display: none;">This app is only available on mobile devices. Please visit from your iOS or Android device.</p>
-
-    <script>
-        // Show desktop message if not on mobile
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        if (!(/iPhone|iPad|iPod|android/i.test(userAgent))) {
-            document.getElementById('desktop-message').style.display = 'block';
-        }
-    </script>
 </body>
 </html>
