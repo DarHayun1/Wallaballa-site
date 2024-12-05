@@ -4,53 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listo - Shopping list companion</title>
-    <script>
-        const CONFIG = {
-            WEBSITE_URL: "https://listo.cloud",
-            IOS: {
-                APP_SCHEME: "wallaballa://open",
-                APP_STORE: "https://listo.cloud" /*Change to real app store link*/,
-                BUNDLE_ID: "com.dar.wallaballa.WallaBalla"
-            },
-            ANDROID: {
-                PACKAGE: "com.dar.wallaballa",
-                PLAY_STORE: "https://listo.cloud" /*Change to real app store link*/
-            }
-        };
-
-        function openAppOrStore() {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            const queryParams = window.location.search;
-
-            if (/iPhone|iPad|iPod/i.test(userAgent)) {
-                window.location.href = `${CONFIG.IOS.APP_SCHEME}${queryParams}`;
-                setTimeout(() => {
-                    window.location.href = CONFIG.IOS.APP_STORE;
-                }, 1500);
-            } else if (/android/i.test(userAgent)) {
-                window.location.href = `intent://open${queryParams}#Intent;scheme=wallaballa;package=${CONFIG.ANDROID.PACKAGE};S.browser_fallback_url=${CONFIG.ANDROID.PLAY_STORE};end`;
-            } else {
-                showDesktopMessage();
-            }
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
         }
 
-        function showDesktopMessage() {
-            document.getElementById('desktop-message').style.display = 'block';
-            document.querySelector('h1').style.display = 'none';
-            document.querySelector('p').style.display = 'none';
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
-        window.onload = () => {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            if (!(/iPhone|iPad|iPod|android/i.test(userAgent))) {
-                showDesktopMessage();
-            }
-        };
-    </script>
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #666;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Open My App</h1>
-    <p>If the app doesn't open automatically, <button onclick="openAppOrStore();">click here</button>.</p>
-    <p id="desktop-message" style="display: none;">This app is only available on mobile devices. Please visit from your iOS or Android device.</p>
+    <div class="container">
+        <h1>Welcome to Listo</h1>
+        <p>Your smart shopping list companion</p>
+        <!-- Add your app description, features, screenshots etc. here -->
+        
+        <div class="footer">
+            <a href="/privacy-policy.html">Privacy Policy</a>
+            <a href="/terms-and-conditions.html">Terms & Conditions</a>
+        </div>
+    </div>
 </body>
 </html>

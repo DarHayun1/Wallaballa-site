@@ -2,7 +2,7 @@
     "applinks": {
         "details": [{
             "appID": "PCCAZHPTAP.com.dar.wallaballa.WallaBalla",
-            "paths": ["/"]
+            "paths": ["/app/*"]
         }]
     }
 }
