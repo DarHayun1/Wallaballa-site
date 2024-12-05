@@ -6,63 +6,32 @@
     <title>Listo - Shopping list companion</title>
     <script>
         const CONFIG = {
-            WEBSITE_URL: "http://listo.cloud",
+            WEBSITE_URL: "https://listo.cloud",
             IOS: {
                 APP_SCHEME: "wallaballa://open",
-                APP_STORE: "http://listo.cloud",
+                APP_STORE: "https://listo.cloud" /*Change to real app store link*/,
                 BUNDLE_ID: "com.dar.wallaballa.WallaBalla"
             },
             ANDROID: {
                 PACKAGE: "com.dar.wallaballa",
-                PLAY_STORE: "http://listo.cloud"
+                PLAY_STORE: "https://listo.cloud" /*Change to real app store link*/
             }
         };
 
-        function redirectToApp() {
+        function openAppOrStore() {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-            // Check if the app opened successfully by monitoring visibility
-            let appOpened = false;
-            const visibilityHandler = () => { if (document.hidden) appOpened = true; };
-            document.addEventListener("visibilitychange", visibilityHandler);
-
-            const timeout = 1500;
+            const queryParams = window.location.search;
 
             if (/iPhone|iPad|iPod/i.test(userAgent)) {
-                if (!sessionStorage.getItem('attemptedRedirectIOS')) {
-                    sessionStorage.setItem('attemptedRedirectIOS', 'true');
-                    window.location.href = CONFIG.WEBSITE_URL;
-
-                    setTimeout(() => {
-                        if (!appOpened) window.location.href = CONFIG.IOS.APP_SCHEME;
-                        setTimeout(() => {
-                            if (!appOpened) window.location.href = CONFIG.IOS.APP_STORE;
-                        }, timeout);
-                    }, timeout);
-                } else {
+                window.location.href = `${CONFIG.IOS.APP_SCHEME}${queryParams}`;
+                setTimeout(() => {
                     window.location.href = CONFIG.IOS.APP_STORE;
-                }
+                }, 1500);
             } else if (/android/i.test(userAgent)) {
-                if (!sessionStorage.getItem('attemptedRedirect')) {
-                    sessionStorage.setItem('attemptedRedirect', 'true');
-                    window.location.href = CONFIG.WEBSITE_URL;
-
-                    setTimeout(() => {
-                        if (!appOpened) {
-                            window.location.href = `intent://open#Intent;scheme=wallaballa;package=${CONFIG.ANDROID.PACKAGE};S.browser_fallback_url=${CONFIG.ANDROID.PLAY_STORE};end`;
-                        }
-                    }, timeout);
-                } else {
-                    window.location.href = CONFIG.ANDROID.PLAY_STORE;
-                }
+                window.location.href = `intent://open${queryParams}#Intent;scheme=wallaballa;package=${CONFIG.ANDROID.PACKAGE};S.browser_fallback_url=${CONFIG.ANDROID.PLAY_STORE};end`;
             } else {
                 showDesktopMessage();
             }
-
-            // Cleanup visibility listener
-            setTimeout(() => {
-                document.removeEventListener("visibilitychange", visibilityHandler);
-            }, timeout * 2);
         }
 
         function showDesktopMessage() {
@@ -75,15 +44,13 @@
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
             if (!(/iPhone|iPad|iPod|android/i.test(userAgent))) {
                 showDesktopMessage();
-            } else {
-                redirectToApp();
             }
         };
     </script>
 </head>
 <body>
-    <h1>Redirecting to My App...</h1>
-    <p>If you're not redirected automatically, <a href="#" onclick="redirectToApp(); return false;">click here</a>.</p>
+    <h1>Open My App</h1>
+    <p>If the app doesn't open automatically, <button onclick="openAppOrStore();">click here</button>.</p>
     <p id="desktop-message" style="display: none;">This app is only available on mobile devices. Please visit from your iOS or Android device.</p>
 </body>
 </html>
