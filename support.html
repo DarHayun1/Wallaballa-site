@@ -42,6 +42,50 @@
         .footer a:hover {
             text-decoration: underline;
         }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            position: relative;
+            padding-right: 30px;
+            user-select: none;
+        }
+
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #666;
+        }
+
+        .faq-question.active::after {
+            content: '-';
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px 0;
+            color: #666;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        .address-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
@@ -52,21 +96,42 @@
             <h2>Contact Us</h2>
             <p>If you need assistance with Listo or have any questions, please don't hesitate to reach out to us:</p>
             <ul>
-                <li>Email: support@listoapp.com</li>
-                <li>Response time: Within 24-48 hours</li>
+                <li>Email: dar.hayun.dev@gmail.com</li>
+                <li>Response time: Within 24-72 hours</li>
             </ul>
+            
+            <div class="address-section">
+                <h3>Mailing Address</h3>
+                <p>Listo App<br>
+                Passatge Borrell 10, 2<br>
+                Barcelona, 08005<br>
+                Spain</p>
+            </div>
         </div>
 
         <div class="support-section">
             <h2>Frequently Asked Questions</h2>
-            <h3>How do I create a new shopping list?</h3>
-            <p>Tap the "+" button on the main screen to create a new list.</p>
 
-            <h3>Can I share my shopping list with others?</h3>
-            <p>Yes, you can share your lists by tapping the share icon and entering the email address of the person you want to share with.</p>
+            <div class="faq-item">
+                <h3 class="faq-question">Can I share my shopping list with others?</h3>
+                <div class="faq-answer">
+                    <p>Yes, you can share your lists by tapping the share icon and sending the link to your friends, or send as text from the list menu.</p>
+                </div>
+            </div>
 
-            <h3>How do I delete items from my list?</h3>
-            <p>Swipe left on any item to delete it, or tap the checkbox to mark it as complete.</p>
+            <div class="faq-item">
+                <h3 class="faq-question">How do I delete my account?</h3>
+                <div class="faq-answer">
+                    <p>Open the profile page from the home page menu and click the "Delete Account" button.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">How do I create a new shopping list?</h3>
+                <div class="faq-answer">
+                    <p>Tap the "+" button on the main screen to create a new list. You can then give your list a name and start adding items right away.</p>
+                </div>
+            </div>
         </div>
 
         <div class="support-section">
@@ -81,5 +146,28 @@
             <a href="/terms-and-conditions.html">Terms & Conditions</a>
         </div>
     </div>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isOpen = answer.classList.contains('show');
+                
+                // Close all other answers
+                document.querySelectorAll('.faq-answer').forEach(a => {
+                    a.classList.remove('show');
+                });
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    q.classList.remove('active');
+                });
+
+                // Toggle current answer
+                if (!isOpen) {
+                    answer.classList.add('show');
+                    question.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html> 
