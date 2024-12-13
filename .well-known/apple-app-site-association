@@ -1,3 +1,7 @@
+---
+layout: null
+content_type: application/json
+---
 {
     "applinks": {
         "details": [{

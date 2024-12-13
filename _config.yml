@@ -1,1 +1,8 @@
+defaults:
+  - scope:
+      path: ".well-known/apple-app-site-association"
+    values:
+      layout: null
+      permalink: /.well-known/apple-app-site-association
+
 include: [".well-known"]
