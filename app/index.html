@@ -22,7 +22,7 @@
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
             const queryParams = window.location.search;
 
-            if (/iPhone|iPad|iPod/i.test(userAgent)) {
+            if (isIOS()) {
                 window.location.href = `${CONFIG.IOS.APP_SCHEME}${queryParams}`;
                 setTimeout(() => {
                     window.location.href = CONFIG.IOS.APP_STORE;
@@ -40,9 +40,22 @@
             document.querySelector('p').style.display = 'none';
         }
 
+        function isIOS() {
+            return [
+                'iPad Simulator',
+                'iPhone Simulator',
+                'iPod Simulator',
+                'iPad',
+                'iPhone',
+                'iPod'
+            ].includes(navigator.platform)
+            // iPad on iOS 13 detection
+            || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+        }
+
         window.onload = () => {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            if (!(/iPhone|iPad|iPod|android/i.test(userAgent))) {
+            if (!(isIOS() || /android/i.test(userAgent))) {
                 showDesktopMessage();
             }
         };
