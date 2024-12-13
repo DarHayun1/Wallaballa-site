@@ -4,9 +4,15 @@ content_type: application/json
 ---
 {
     "applinks": {
-        "details": [{
-            "appID": "PCCAZHPTAP.com.dar.wallaballa.WallaBalla",
-            "paths": ["/app/*"]
-        }]
+        "details": [
+            {
+                "appID": "PCCAZHPTAP.com.dar.wallaballa.WallaBalla",
+                "paths": ["/app/*"]
+            },
+            {
+                "appID": "PCCAZHPTAP.com.dar.wallaballa.WallaBalla.test",
+                "paths": ["/app/*"]
+            }
+        ]
     }
 }
