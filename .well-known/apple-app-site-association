@@ -2,12 +2,12 @@
     "applinks": {
         "details": [
             {
-                "appID": "PCCAZHPTAP.com.dar.wallaballa.WallaBalla",
-                "paths": ["/app/*"]
-            },
-            {
-                "appID": "PCCAZHPTAP.com.dar.wallaballa.WallaBalla.test",
-                "paths": ["/app/*"]
+                "appIDs": ["PCCAZHPTAP.com.dar.wallaballa.WallaBalla", "PCCAZHPTAP.com.dar.wallaballa.WallaBalla.test"],
+                "components": [
+                    {
+                        "/": "/app/*" 
+                    }
+                ]
             }
         ]
     }
