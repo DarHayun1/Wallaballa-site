@@ -66,7 +66,7 @@ body {
 }
 
 .store-button img {
-    height: 40px;
+    height: 45px;
     transition: transform 0.2s;
 }
 
@@ -75,8 +75,8 @@ body {
 }
 
 .store-button img[alt="Get it on Google Play"] {
-    height: 60px;
-    margin: -10px 0;
+    height: 58px;
+    margin: -6px 0;
 }
 
 .features {
