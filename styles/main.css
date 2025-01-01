@@ -62,21 +62,24 @@ body {
     display: flex;
     gap: 24px;
     justify-content: center;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
 }
 
 .store-button img {
-    height: 45px;
     transition: transform 0.2s;
 }
 
-.store-button:hover img {
-    transform: scale(1.05);
+.store-button img[alt="Download on the App Store"] {
+    height: 40px;
 }
 
 .store-button img[alt="Get it on Google Play"] {
     height: 58px;
     margin: -6px 0;
+}
+
+.store-button:hover img {
+    transform: scale(1.05);
 }
 
 .features {
