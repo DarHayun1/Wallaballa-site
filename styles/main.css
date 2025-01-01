@@ -1,0 +1,107 @@
+:root {
+    --primary-color: #4A90E2;
+    --text-color: #333;
+    --background-color: #F5F7FA;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.hero {
+    padding: 60px 20px;
+}
+
+.logo {
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 24px;
+}
+
+.logo-text {
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 32px;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: #666;
+    margin-bottom: 32px;
+}
+
+.store-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 48px;
+}
+
+.store-button img {
+    height: 48px;
+    transition: transform 0.2s;
+}
+
+.store-button:hover img {
+    transform: scale(1.05);
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 32px;
+    padding: 40px 20px;
+}
+
+.feature {
+    padding: 24px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+    margin-top: 60px;
+    padding: 20px;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+.footer a {
+    color: #666;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .store-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .title {
+        font-size: 2rem;
+    }
+} 

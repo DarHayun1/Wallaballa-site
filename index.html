@@ -3,54 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listo - Shopping list companion</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
-        }
-
-        .container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            text-align: center;
-        }
-
-        .footer a {
-            color: #666;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <title>Listo - Your Smart Shopping List Companion</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to Listo</h1>
-        <p>Your smart shopping list companion</p>
-        <!-- Add your app description, features, screenshots etc. here -->
-        
-        <div class="footer">
+        <section class="hero">
+            <img src="/images/logo-round.png" alt="Listo Logo" class="logo">
+            <img src="/images/logo-text.png" alt="Listo" class="logo-text">
+            <p class="subtitle">Your smart shopping list companion that makes grocery shopping a breeze</p>
+            
+            <div class="store-buttons">
+                <a href="https://apps.apple.com/us/app/listo-ready-set-shop/id6737981032" class="store-button">
+                    <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Download on the App Store">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.dar.wallaballa" class="store-button">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play">
+                </a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature">
+                <h3>Smart Lists</h3>
+                <p>Create and manage multiple shopping lists with ease</p>
+            </div>
+            <div class="feature">
+                <h3>Share & Collaborate</h3>
+                <p>Share your lists with family and friends in real-time</p>
+            </div>
+            <div class="feature">
+                <h3>Quick Add</h3>
+                <p>Intelligent suggestions make adding items faster than ever</p>
+            </div>
+        </section>
+
+        <footer class="footer">
             <a href="/support.html">Support</a>
             <a href="/privacy-policy.html">Privacy Policy</a>
             <a href="/terms-and-conditions.html">Terms & Conditions</a>
-        </div>
+        </footer>
     </div>
 </body>
 </html>
