@@ -24,18 +24,26 @@ body {
     padding: 60px 20px;
 }
 
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
 .logo {
-    width: 130px;
-    height: 130px;
+    width: 100px;
+    height: 100px;
     max-width: 100%;
     height: auto;
-    margin-bottom: 24px;
+    margin-bottom: 0;
 }
 
 .logo-text {
     max-width: 200px;
     height: auto;
-    margin-bottom: 32px;
+    margin-bottom: 0;
 }
 
 .title {
