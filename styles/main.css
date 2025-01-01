@@ -52,13 +52,13 @@ body {
 
 .store-buttons {
     display: flex;
-    gap: 16px;
+    gap: 24px;
     justify-content: center;
-    margin-bottom: 48px;
+    margin-bottom: 80px;
 }
 
 .store-button img {
-    height: 48px;
+    height: 40px;
     transition: transform 0.2s;
 }
 
@@ -66,11 +66,16 @@ body {
     transform: scale(1.05);
 }
 
+.store-button img[alt="Get it on Google Play"] {
+    height: 60px;
+    margin: -10px 0;
+}
+
 .features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 32px;
-    padding: 40px 20px;
+    padding: 0 20px;
 }
 
 .feature {
