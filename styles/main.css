@@ -73,12 +73,12 @@ body {
 }
 
 .store-button img[alt="Download on the App Store"] {
-    height: 40px;
+    height: 44px;
 }
 
 .store-button img[alt="Get it on Google Play"] {
     height: 64px;
-    margin: -6px 0;
+    margin: -10px 0;
 }
 
 .store-button:hover img {
